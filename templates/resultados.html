@@ -1,0 +1,385 @@
+
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Resultados de Loterías</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                font-family: 'Segoe UI', sans-serif;
+                background: #f7f9fb;
+                margin: 0;
+                padding: 20px;
+            }
+            h1 {
+                text-align: center;
+                color: #222;
+            }
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+            .loteria-block {
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                width: 280px;
+                padding: 15px;
+                position: relative;
+                transition: transform 0.2s;
+            }
+            .loteria-block:hover {
+                transform: translateY(-5px);
+            }
+            .fecha-box {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: #e0e0e0;
+                color: #333;
+                padding: 4px 10px;
+                border-radius: 10px;
+                font-size: 13px;
+                font-weight: bold;
+            }
+            .game-logo {
+                width: 100%;
+                max-height: 100px;
+                object-fit: contain;
+                margin-bottom: 10px;
+            }
+            .game-title {
+                font-size: 18px;
+                font-weight: bold;
+                margin: 5px 0 10px 0;
+                color: #007bff;
+                text-align: center;
+            }
+            .game-scores {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                justify-content: center;
+            }
+            .score {
+                width: 40px;
+                height: 40px;
+                background: #ffcc00;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 16px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Resultados de Loterías</h1>
+        <div class="container">
+    
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/b145cbb4804a550c7c9b7b5d793154bf.png" alt="Juega + Pega +" class="game-logo">
+                <div class="game-title">Juega + Pega +</div>
+                <div class="game-scores">
+                    <div class="score">19</div><div class="score">25</div><div class="score">13</div><div class="score">15</div><div class="score">05</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/gana-mas.png" alt="Gana Más" class="game-logo">
+                <div class="game-title">Gana Más</div>
+                <div class="game-scores">
+                    <div class="score">16</div><div class="score">40</div><div class="score">17</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/7827e5ee87f05e864aa79f64210269c5.png" alt="Lotería Nacional" class="game-logo">
+                <div class="game-title">Lotería Nacional</div>
+                <div class="game-scores">
+                    <div class="score">41</div><div class="score">53</div><div class="score">19</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/pega-3-mas.png" alt="Pega 3 Más" class="game-logo">
+                <div class="game-title">Pega 3 Más</div>
+                <div class="game-scores">
+                    <div class="score">49</div><div class="score">02</div><div class="score">16</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/quiniela-leidsa.png" alt="Quiniela Leidsa" class="game-logo">
+                <div class="game-title">Quiniela Leidsa</div>
+                <div class="game-scores">
+                    <div class="score">46</div><div class="score">91</div><div class="score">49</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/b9f95bbf6087f617f58efb5078ca5898.png" alt="Loto Pool" class="game-logo">
+                <div class="game-title">Loto Pool</div>
+                <div class="game-scores">
+                    <div class="score">09</div><div class="score">14</div><div class="score">15</div><div class="score">17</div><div class="score">20</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/super-kino.png" alt="Super Kino TV" class="game-logo">
+                <div class="game-title">Super Kino TV</div>
+                <div class="game-scores">
+                    <div class="score">04</div><div class="score">05</div><div class="score">14</div><div class="score">20</div><div class="score">36</div><div class="score">41</div><div class="score">49</div><div class="score">51</div><div class="score">53</div><div class="score">57</div><div class="score">59</div><div class="score">60</div><div class="score">64</div><div class="score">66</div><div class="score">70</div><div class="score">71</div><div class="score">74</div><div class="score">75</div><div class="score">77</div><div class="score">78</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">12-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/loto-leidsa.png" alt="Loto - Super Loto Más" class="game-logo">
+                <div class="game-title">Loto - Super Loto Más</div>
+                <div class="game-scores">
+                    <div class="score">01</div><div class="score">09</div><div class="score">20</div><div class="score">23</div><div class="score">26</div><div class="score">38</div><div class="score">02</div><div class="score">06</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/loto pool real.png" alt="Loto Pool" class="game-logo">
+                <div class="game-title">Loto Pool</div>
+                <div class="game-scores">
+                    <div class="score">05</div><div class="score">68</div><div class="score">02</div><div class="score">94</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/loteria-real.png" alt="Quiniela Real" class="game-logo">
+                <div class="game-title">Quiniela Real</div>
+                <div class="game-scores">
+                    <div class="score">19</div><div class="score">63</div><div class="score">14</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">11-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/loto-real.png" alt="Loto Real" class="game-logo">
+                <div class="game-title">Loto Real</div>
+                <div class="game-scores">
+                    <div class="score">07</div><div class="score">10</div><div class="score">22</div><div class="score">25</div><div class="score">29</div><div class="score">31</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/quiniela-loteka.png" alt="Quiniela Loteka" class="game-logo">
+                <div class="game-title">Quiniela Loteka</div>
+                <div class="game-scores">
+                    <div class="score">96</div><div class="score">50</div><div class="score">96</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/mega-chances.png" alt="Mega Chances" class="game-logo">
+                <div class="game-title">Mega Chances</div>
+                <div class="game-scores">
+                    <div class="score">77</div><div class="score">15</div><div class="score">95</div><div class="score">87</div><div class="score">09</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/florida-dia.png" alt="Florida Día" class="game-logo">
+                <div class="game-title">Florida Día</div>
+                <div class="game-scores">
+                    <div class="score">05</div><div class="score">45</div><div class="score">04</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/new-york-tarde.png" alt="New York Tarde" class="game-logo">
+                <div class="game-title">New York Tarde</div>
+                <div class="game-scores">
+                    <div class="score">16</div><div class="score">62</div><div class="score">66</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">12-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/florida-noche.png" alt="Florida Noche" class="game-logo">
+                <div class="game-title">Florida Noche</div>
+                <div class="game-scores">
+                    <div class="score">44</div><div class="score">56</div><div class="score">26</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">12-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/new-york-noche.png" alt="New York Noche" class="game-logo">
+                <div class="game-title">New York Noche</div>
+                <div class="game-scores">
+                    <div class="score">06</div><div class="score">53</div><div class="score">43</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">11-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/mega-millions.png" alt="Mega Millions" class="game-logo">
+                <div class="game-title">Mega Millions</div>
+                <div class="game-scores">
+                    <div class="score">15</div><div class="score">37</div><div class="score">38</div><div class="score">56</div><div class="score">58</div><div class="score">19</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">12-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/powerball.png" alt="PowerBall" class="game-logo">
+                <div class="game-title">PowerBall</div>
+                <div class="game-scores">
+                    <div class="score">16</div><div class="score">22</div><div class="score">44</div><div class="score">45</div><div class="score">53</div><div class="score">19</div><div class="score">2X</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">12-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/97e599e075ad3e4d8f66ab7a06363b0d.png" alt="Cash 4 Life" class="game-logo">
+                <div class="game-title">Cash 4 Life</div>
+                <div class="game-scores">
+                    <div class="score">32</div><div class="score">17</div><div class="score">53</div><div class="score">50</div><div class="score">10</div><div class="score">03</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/la-primera-medio-dia.png" alt="La Primera Día" class="game-logo">
+                <div class="game-title">La Primera Día</div>
+                <div class="game-scores">
+                    <div class="score">11</div><div class="score">71</div><div class="score">57</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">12-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/la-primera-noche.png" alt="Primera Noche" class="game-logo">
+                <div class="game-title">Primera Noche</div>
+                <div class="game-scores">
+                    <div class="score">47</div><div class="score">14</div><div class="score">21</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">12-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/loto-5.png" alt="Loto 5" class="game-logo">
+                <div class="game-title">Loto 5</div>
+                <div class="game-scores">
+                    <div class="score">15</div><div class="score">16</div><div class="score">28</div><div class="score">18</div><div class="score">34</div><div class="score">10</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/la-suerte-dia.png" alt="La Suerte 12:30" class="game-logo">
+                <div class="game-title">La Suerte 12:30</div>
+                <div class="game-scores">
+                    <div class="score">94</div><div class="score">99</div><div class="score">39</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/la-suerte-noche.png" alt="La Suerte 18:00" class="game-logo">
+                <div class="game-title">La Suerte 18:00</div>
+                <div class="game-scores">
+                    <div class="score">70</div><div class="score">24</div><div class="score">16</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/d46144f7e1f664fee5ba811f984c246e.png" alt="Quiniela LoteDom" class="game-logo">
+                <div class="game-title">Quiniela LoteDom</div>
+                <div class="game-scores">
+                    <div class="score">31</div><div class="score">62</div><div class="score">86</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/c700bf17161eed892af1be091a480ca4.png" alt="El Quemaito Mayor" class="game-logo">
+                <div class="game-title">El Quemaito Mayor</div>
+                <div class="game-scores">
+                    <div class="score">64</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/anguila-manana-10am.png" alt="Anguila Mañana" class="game-logo">
+                <div class="game-title">Anguila Mañana</div>
+                <div class="game-scores">
+                    <div class="score">80</div><div class="score">02</div><div class="score">66</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/anguila-medio-dia-1pm.png" alt="Anguila Medio Día" class="game-logo">
+                <div class="game-title">Anguila Medio Día</div>
+                <div class="game-scores">
+                    <div class="score">27</div><div class="score">54</div><div class="score">35</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/anguila-tarde-6pm.png" alt="Anguila Tarde" class="game-logo">
+                <div class="game-title">Anguila Tarde</div>
+                <div class="game-scores">
+                    <div class="score">83</div><div class="score">06</div><div class="score">71</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">12-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/anguila-noche-9pm.png" alt="Anguila Noche" class="game-logo">
+                <div class="game-title">Anguila Noche</div>
+                <div class="game-scores">
+                    <div class="score">98</div><div class="score">37</div><div class="score">29</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/quiniela-king-lottery-dia.png" alt="King Lottery 12:30" class="game-logo">
+                <div class="game-title">King Lottery 12:30</div>
+                <div class="game-scores">
+                    <div class="score">28</div><div class="score">10</div><div class="score">94</div>
+                </div>
+            </div>
+        
+            <div class="loteria-block">
+                <div class="fecha-box">13-04</div>
+                <img src="https://cdn-lottery.kiskoo.com/loterias-dominicanas/quiniela-king-lottery-noche.png" alt="King Lottery 7:30" class="game-logo">
+                <div class="game-title">King Lottery 7:30</div>
+                <div class="game-scores">
+                    <div class="score">91</div><div class="score">79</div><div class="score">20</div>
+                </div>
+            </div>
+        
+        </div>
+    </body>
+    </html>
+    
