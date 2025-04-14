@@ -1,3 +1,4 @@
+
 import paramiko
 
 def main():
@@ -8,7 +9,6 @@ def main():
     local_path = "resultados.html"
     remote_path= "/home/OmarValdez/templates/resultados.html"
    
-
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -16,16 +16,12 @@ def main():
 
         sftp = ssh.open_sftp()
         sftp.put(local_path, remote_path)
+        print(f"✅ Subido: {local_path} → {remote_path}")
         sftp.close()
         ssh.close()
-
-        sftp.put(local_path, remote_path)
-    print(f"✅ Subido: {local_path} → {remote_path}")
-
 
     except Exception as e:
         print(f"❌ Error al subir archivo: {e}")
         
-
 if __name__ == "__main__":
     main()
