@@ -1,0 +1,16 @@
+<div style="font-family: Arial, sans-serif;">
+  <h3 style="text-align:center;">Resultados de Lotería ({{ registro.fecha }})</h3>
+  {% for l in registro.datos %}
+    <div style="border:1px solid #ddd; border-radius:10px; padding:10px; margin:10px 0;">
+      <strong style="color:#007bff;">{{ l.nombre }}</strong><br>
+      <small style="color:#777;">{{ l.fecha }}</small>
+      <div style="margin-top:8px;">
+        {% for n in l.numeros %}
+          <span style="display:inline-block; background:gold; color:#000; font-weight:bold; width:30px; height:30px; border-radius:50%; line-height:30px; text-align:center; margin:3px;">
+            {{ n }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

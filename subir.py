@@ -1,5 +1,5 @@
-
 import paramiko
+
 
 def main():
     host = "ssh.pythonanywhere.com"
@@ -7,8 +7,8 @@ def main():
     username = "OmarValdez"
     password = "Loteria2024"  # cámbiala aquí si ya la actualizaste
     local_path = "resultados.html"
-    remote_path= "/home/OmarValdez/templates/resultados.html"
-   
+    remote_path = "/home/OmarValdez/templates/resultados.html"
+
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -22,6 +22,7 @@ def main():
 
     except Exception as e:
         print(f"❌ Error al subir archivo: {e}")
-        
+
+
 if __name__ == "__main__":
     main()

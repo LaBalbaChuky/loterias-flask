@@ -29,4 +29,4 @@ run = "python3 main.py"
 
 [[ports]]
 localPort = 3000
-externalPort = 80
+externalPort = 3000
