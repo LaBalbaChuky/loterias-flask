@@ -28,8 +28,9 @@ def obtener_resultados():
 
         loterias.append(loteria)
 
-    fecha_actual = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    guardar_historial(loterias, fecha_actual)
+    # ✅ IMPORTANTE: devolver también la hora actual
+    timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    return loterias, timestamp
 
 def guardar_historial(loterias, timestamp):
     with open("historial.json", "a", encoding="utf-8") as f:
