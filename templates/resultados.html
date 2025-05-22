@@ -6,147 +6,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f2f2f2;
-      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
       padding: 20px;
     }
-
     h1 {
       text-align: center;
       color: #333;
-      margin-bottom: 10px;
     }
-
-    .fecha-actualizacion {
+    .fecha {
       text-align: center;
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 30px;
+      color: #888;
+      margin-bottom: 20px;
     }
-
-    form {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    input[type="date"] {
-      padding: 8px;
-      font-size: 16px;
-    }
-
-    button {
-      padding: 8px 16px;
-      font-size: 16px;
-      cursor: pointer;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .card {
+    .loteria {
       background: white;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform 0.2s ease;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px auto;
+      max-width: 700px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card img {
-      height: 60px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
-
     .titulo {
-      font-size: 18px;
       font-weight: bold;
+      font-size: 18px;
       color: #007bff;
-      text-align: center;
       margin-bottom: 5px;
     }
-
-    .fecha {
+    .game-date {
       font-size: 14px;
-      color: #777;
+      color: #555;
       margin-bottom: 10px;
     }
-
     .numeros {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       gap: 10px;
     }
-
     .bola {
       background: gold;
-      color: #000;
-      font-weight: bold;
+      border-radius: 50%;
       width: 40px;
       height: 40px;
-      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      font-weight: bold;
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
     }
-
-    .no-resultados {
-      text-align: center;
-      color: #999;
-      font-size: 16px;
-      margin-top: 40px;
+    img {
+      height: 50px;
+      object-fit: contain;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
   <h1>Resultados de Lotería</h1>
+  <p class="fecha">Última actualización: {{ actualizacion }}</p>
 
-  <form method="get" action="/">
-    <input type="date" name="fecha" value="{{ fecha|default('') }}">
-    <button type="submit">Buscar por fecha</button>
-  </form>
-
-  {% if registros and registros[0].fecha %}
-    <div class="fecha-actualizacion">Última actualización: {{ registros[0].fecha }}</div>
-  {% endif %}
-
-  {% if registros %}
-    <div class="grid">
-      {% for registro in registros %}
-        {% for l in registro.datos %}
-          <div class="card">
-            <img src="{{ l.imagen }}" alt="{{ l.nombre }}">
-            <div class="titulo">{{ l.nombre }}</div>
-            <div class="fecha">{{ l.fecha }}</div>
-            <div class="numeros">
-              {% for n in l.numeros %}
-                <div class="bola">{{ n }}</div>
-              {% endfor %}
-            </div>
-          </div>
+  {% for l in loterias %}
+    <div class="loteria">
+      <img src="{{ l.imagen }}" alt="{{ l.nombre }}">
+      <div class="titulo">{{ l.nombre }}</div>
+      <div class="game-date">{{ l.fecha }}</div>
+      <div class="numeros">
+        {% for n in l.numeros %}
+          <div class="bola">{{ n }}</div>
         {% endfor %}
-      {% endfor %}
+      </div>
     </div>
-  {% else %}
-    <p class="no-resultados">No hay resultados disponibles.</p>
-  {% endif %}
+  {% endfor %}
 </body>
 </html>
