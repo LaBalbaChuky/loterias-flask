@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from scraper import obtener_resultados
+from scraper import obtener_resultados, guardar_historial
 from datetime import datetime
 import json
 import os
@@ -45,11 +45,12 @@ def index():
 @app.route('/actualizar')
 def actualizar():
     try:
-        obtener_resultados()
-        return "✅ Actualización completada", 200
+        loterias, timestamp = obtener_resultados()
+        guardar_historial(loterias, timestamp)
+        return f"✅ Resultados actualizados: {timestamp}", 200
     except Exception as e:
         return f"❌ Error: {e}", 500
-
+        
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host="0.0.0.0", port=port)
