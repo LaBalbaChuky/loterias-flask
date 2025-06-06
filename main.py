@@ -6,6 +6,10 @@ import os  # ⬅️ NECESARIO
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/')
+def home():
+    return "✅ API de Lotería funcionando. Usa /api para los datos."
+
 @app.route('/api')
 def api():
     loterias, timestamp = obtener_resultados()
