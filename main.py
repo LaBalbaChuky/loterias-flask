@@ -1,6 +1,23 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from scraper import obtener_resultados
+import os  # ⬅️ NECESARIO
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/api')
+def api():
+    loterias, timestamp = obtener_resultados()
+    return jsonify({
+        "actualizacion": timestamp,
+        "loterias": loterias
+    })
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+
 
 app = Flask(__name__)
 CORS(app)  # permite acceso desde tu frontend
@@ -27,4 +44,4 @@ def actualizar():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host='0.0.0.0', port=port)
