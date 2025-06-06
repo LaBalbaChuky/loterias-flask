@@ -1,8 +1,17 @@
-from flask import Flask, render_template
-from scraper import obtener_resultados, guardar_historial
-import os
+from flask import Flask, jsonify
+from flask_cors import CORS
+from scraper import obtener_resultados
 
 app = Flask(__name__)
+CORS(app)  # permite acceso desde tu frontend
+
+@app.route('/api')
+def api():
+    loterias, timestamp = obtener_resultados()
+    return jsonify({
+        "actualizacion": timestamp,
+        "loterias": loterias
+    })
 
 @app.route('/')
 def home():
