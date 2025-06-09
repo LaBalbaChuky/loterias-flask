@@ -28,7 +28,9 @@ def obtener_resultados():
 
         loterias.append(loteria)
 
-    return loterias
+    # ✅ IMPORTANTE: devolver también la hora actual
+    timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    return loterias, timestamp
 
 # Agrupar loterías
 def agrupar_loterias(loterias):
@@ -125,9 +127,7 @@ if __name__ == "__main__":
     with open("resultados.html", "w", encoding="utf-8") as f:
         f.write(html)
 
-# ✅ IMPORTANTE: devolver también la hora actual
-    timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    return loterias, timestamp
+
 
 def guardar_historial(loterias, timestamp):
     with open("historial.json", "a", encoding="utf-8") as f:
