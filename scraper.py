@@ -1,7 +1,7 @@
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
-
+import json
 
 def obtener_resultados():
     url = "https://loteriasdominicanas.com/"
@@ -28,11 +28,9 @@ def obtener_resultados():
 
         loterias.append(loteria)
 
-    # ✅ IMPORTANTE: devolver también la hora actual
     timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     return loterias, timestamp
 
-# Agrupar loterías
 def agrupar_loterias(loterias):
     grupos = {
         "Nacional": [],
@@ -62,7 +60,6 @@ def agrupar_loterias(loterias):
             grupos["Otras"].append(l)
     return grupos
 
-# Crear HTML
 def crear_html(grupos):
     html = """
 <!DOCTYPE html>
@@ -118,18 +115,18 @@ def crear_html(grupos):
     html += '</body></html>'
     return html
 
-# Ejecutar y guardar HTML
+def guardar_historial(loterias, timestamp):
+    with open("historial.json", "a", encoding="utf-8") as f:
+        registro = { "fecha": timestamp, "datos": loterias }
+        f.write(json.dumps(registro, ensure_ascii=False) + "\n")
+
+# Ejecutar si se corre directamente
 if __name__ == "__main__":
-    loterias = obtener_resultados()
+    loterias, timestamp = obtener_resultados()
     grupos = agrupar_loterias(loterias)
     html = crear_html(grupos)
 
     with open("resultados.html", "w", encoding="utf-8") as f:
         f.write(html)
 
-
-
-def guardar_historial(loterias, timestamp):
-    with open("historial.json", "a", encoding="utf-8") as f:
-        registro = { "fecha": timestamp, "datos": loterias }
-        f.write(json.dumps(registro, ensure_ascii=False) + "\n")
+    guardar_historial(loterias, timestamp)
