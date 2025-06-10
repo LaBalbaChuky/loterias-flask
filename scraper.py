@@ -94,23 +94,29 @@ def crear_html(grupos):
 """
 
     for grupo, lotes in grupos.items():
-        if not lotes:
-            continue
-        html += f'<div class="grupo-loteria">'
-        html += f'<div class="company-title">{grupo}</div>'
-        html += '<div class="contenedor-loterias">'
-        for l in lotes:
-            html += f"""
-            <div class="tarjeta">
-                <img src="{l['imagen']}" alt="{l['nombre']}">
-                <h3>{l['nombre']}</h3>
-                <p class="fecha">{l['fecha']}</p>
-                <div class="numeros">
-                    {''.join(f'<div class="bola">{n}</div>' for n in l['numeros'])}
-                </div>
+    # filtra resultados sin números
+    lotes_validos = [l for l in lotes if l['numeros']]
+    if not lotes_validos:
+        continue
+
+    html += f'<div class="grupo-loteria">'
+    html += f'<div class="company-title">{grupo}</div>'
+    html += '<div class="contenedor-loterias">'
+
+    for l in lotes_validos:
+        html += f"""
+        <div class="tarjeta">
+            <img src="{l['imagen']}" alt="{l['nombre']}">
+            <h3>{l['nombre']}</h3>
+            <p class="fecha">{l['fecha']}</p>
+            <div class="numeros">
+                {''.join(f'<div class="bola">{n}</div>' for n in l['numeros'])}
             </div>
-            """
-        html += '</div></div>'
+        </div>
+        """
+
+    html += '</div></div>'
+
 
     html += '</body></html>'
     return html
