@@ -63,9 +63,9 @@ def agrupar_loterias(loterias):
 def crear_html(grupos):
     html = """
 <!DOCTYPE html>
-<html lang="es">
+<html lang=\"es\">
 <head>
-    <meta charset="UTF-8">
+    <meta charset=\"UTF-8\">
     <title>Resultados de Hoy RD</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #f4f6f8; margin: 0; padding: 0; }
@@ -87,36 +87,32 @@ def crear_html(grupos):
 <body>
 
 <header>
-    <a href="index.html">
-        <img src="img/logo.png" alt="Resultados de Hoy RD">
+    <a href=\"index.html\">
+        <img src=\"img/logo.png\" alt=\"Resultados de Hoy RD\">
     </a>
 </header>
 """
 
     for grupo, lotes in grupos.items():
-    # filtra resultados sin números
-    lotes_validos = [l for l in lotes if l['numeros']]
-    if not lotes_validos:
-        continue
+        lotes_validos = [l for l in lotes if l['numeros']]
+        if not lotes_validos:
+            continue
 
-    html += f'<div class="grupo-loteria">'
-    html += f'<div class="company-title">{grupo}</div>'
-    html += '<div class="contenedor-loterias">'
-
-    for l in lotes_validos:
-        html += f"""
-        <div class="tarjeta">
-            <img src="{l['imagen']}" alt="{l['nombre']}">
-            <h3>{l['nombre']}</h3>
-            <p class="fecha">{l['fecha']}</p>
-            <div class="numeros">
-                {''.join(f'<div class="bola">{n}</div>' for n in l['numeros'])}
+        html += f'<div class="grupo-loteria">'
+        html += f'<div class="company-title">{grupo}</div>'
+        html += '<div class="contenedor-loterias">'
+        for l in lotes_validos:
+            html += f"""
+            <div class="tarjeta">
+                <img src="{l['imagen']}" alt="{l['nombre']}">
+                <h3>{l['nombre']}</h3>
+                <p class="fecha">{l['fecha']}</p>
+                <div class="numeros">
+                    {''.join(f'<div class="bola">{n}</div>' for n in l['numeros'])}
+                </div>
             </div>
-        </div>
-        """
-
-    html += '</div></div>'
-
+            """
+        html += '</div></div>'
 
     html += '</body></html>'
     return html
@@ -126,7 +122,6 @@ def guardar_historial(loterias, timestamp):
         registro = { "fecha": timestamp, "datos": loterias }
         f.write(json.dumps(registro, ensure_ascii=False) + "\n")
 
-# Ejecutar si se corre directamente
 if __name__ == "__main__":
     loterias, timestamp = obtener_resultados()
     grupos = agrupar_loterias(loterias)
