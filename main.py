@@ -12,9 +12,7 @@ def home():
     grupos = agrupar_loterias(loterias)
     return render_template("resultados.html", grupos=grupos, actualizacion=actualizacion)
     
-@app.route('/')
-def home():
-    return "✅ API de Lotería funcionando. Usa /api para los datos."
+
 
 @app.route('/api')
 def api():
