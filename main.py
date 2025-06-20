@@ -38,11 +38,6 @@ def api():
         "loterias": loterias
     })
 
-@app.route('/')
-def home():
-    loterias, timestamp = obtener_resultados()
-    guardar_historial(loterias, timestamp)
-    return render_template("resultados.html", loterias=loterias, actualizacion=timestamp)
 
 @app.route('/actualizar')
 def actualizar():
