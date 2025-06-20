@@ -1,7 +1,7 @@
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
-import jso
+import json
 
 def obtener_resultados():
     url = "https://loteriasdominicanas.com/"
