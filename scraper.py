@@ -43,15 +43,15 @@ def agrupar_loterias(loterias):
     }
     for l in loterias:
         nombre = l['nombre'].lower()
-        if "nacional" in nombre:
+        if "nacional" in nombre or "juega +" in nombre or "gana más" in nombre:
             grupos["Nacional"].append(l)
-        elif "leidsa" in nombre:
+        elif "leidsa" in nombre or "loto pool" in nombre or "quiniela leidsa" in nombre:
             grupos["Leidsa"].append(l)
-        elif "loteka" in nombre:
+        elif "loteka" in nombre or "mega lotto" in nombre:
             grupos["Loteka"].append(l)
-        elif "real" in nombre:
+        elif "real" in nombre or "loto real" in nombre or "quiniela real" in nombre:
             grupos["Lotería Real"].append(l)
-        elif "primera" in nombre:
+        elif "primera" in nombre or "loto 5" in nombre:
             grupos["La Primera"].append(l)
         elif "new york" in nombre:
             grupos["New York"].append(l)
