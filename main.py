@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from scraper import obtener_resultados
+from flask import Flask, render_template
+from scraper import obtener_resultados, agrupar_loterias
 import os  # ⬅️ NECESARIO
 
 app = Flask(__name__)
