@@ -1,7 +1,7 @@
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
-import json
+import jso
 
 def obtener_resultados():
     url = "https://loteriasdominicanas.com/"
@@ -59,11 +59,7 @@ def agrupar_loterias(loterias):
             grupos["Otras"].append(l)
     return grupos
 
-@app.route("/")
-def home():
-    loterias, actualizacion = obtener_resultados()
-    grupos = agrupar_loterias(loterias)
-    return render_template("resultados.html", grupos=grupos, actualizacion=actualizacion)
+
 
 
 
