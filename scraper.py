@@ -35,29 +35,44 @@ def agrupar_loterias(loterias):
     grupos = {
         "Nacional": [],
         "Leidsa": [],
+        "Real": [],
         "Loteka": [],
-        "Lotería Real": [],
-        "La Primera": [],
-        "New York": [],
+        "Americanas": [],
+        "Primera": [],
+        "La Suerte": [],
+        "LoteDom": [],
+        "King Lottery": [],
+        "Anguila": [],
         "Otras": []
     }
+
     for l in loterias:
         nombre = l['nombre'].lower()
-        if "nacional" in nombre or "juega +" in nombre or "gana más" in nombre:
+        if any(x in nombre for x in ["nacional", "juega +", "pega +", "gana más"]):
             grupos["Nacional"].append(l)
-        elif "leidsa" in nombre or "loto pool" in nombre or "quiniela leidsa" in nombre:
+        elif any(x in nombre for x in ["leidsa", "pega 3 más", "loto pool", "super kino", "quiniela leidsa", "loto más"]):
             grupos["Leidsa"].append(l)
-        elif "loteka" in nombre or "mega lotto" in nombre:
+        elif any(x in nombre for x in ["real", "quiniela real", "loto real"]):
+            grupos["Real"].append(l)
+        elif any(x in nombre for x in ["loteka", "mega chances"]):
             grupos["Loteka"].append(l)
-        elif "real" in nombre or "loto real" in nombre or "quiniela real" in nombre:
-            grupos["Lotería Real"].append(l)
-        elif "primera" in nombre or "loto 5" in nombre:
-            grupos["La Primera"].append(l)
-        elif "new york" in nombre:
-            grupos["New York"].append(l)
+        elif any(x in nombre for x in ["new york", "florida", "mega millions", "powerball"]):
+            grupos["Americanas"].append(l)
+        elif any(x in nombre for x in ["primera", "loto 5"]):
+            grupos["Primera"].append(l)
+        elif any(x in nombre for x in ["la suerte"]):
+            grupos["La Suerte"].append(l)
+        elif any(x in nombre for x in ["lotedom", "quemaito"]):
+            grupos["LoteDom"].append(l)
+        elif any(x in nombre for x in ["king lottery"]):
+            grupos["King Lottery"].append(l)
+        elif any(x in nombre for x in ["anguila"]):
+            grupos["Anguila"].append(l)
         else:
             grupos["Otras"].append(l)
+
     return grupos
+
 
 
 
