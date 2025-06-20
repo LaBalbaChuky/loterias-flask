@@ -6,6 +6,12 @@ import os  # ⬅️ NECESARIO
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/")
+def home():
+    loterias, actualizacion = obtener_resultados()
+    grupos = agrupar_loterias(loterias)
+    return render_template("resultados.html", grupos=grupos, actualizacion=actualizacion)
+    
 @app.route('/')
 def home():
     return "✅ API de Lotería funcionando. Usa /api para los datos."
