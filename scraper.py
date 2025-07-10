@@ -7,7 +7,9 @@ def obtener_resultados():
     url = "https://loteriasdominicanas.com/"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-
+    timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    return loterias, timestamp
+    
     loterias = []
 
     for item in soup.find_all('div', class_='game-block'):
