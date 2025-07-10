@@ -31,5 +31,9 @@ def actualizar():
     return f"✅ Datos actualizados: {timestamp}", 200
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    if __name__ == "__main__":
+    loterias, actualizacion = obtener_resultados()
+    grupos = agrupar_loterias(loterias)
+    html = crear_html(grupos, actualizacion)  # 👈 asegúrate que aquí usas actualizacion
+    guardar_html(html)
+    subir_a_netlify()
