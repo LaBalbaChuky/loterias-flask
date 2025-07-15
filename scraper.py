@@ -70,3 +70,5 @@ def guardar_historial(loterias, timestamp):
         registro = { "fecha": timestamp, "datos": loterias }
         f.write(json.dumps(registro, ensure_ascii=False) + "\n")
 
+with open("public/index.html", "w", encoding="utf-8") as f:
+    f.write(html)
