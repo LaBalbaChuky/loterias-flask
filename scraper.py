@@ -70,12 +70,19 @@ def guardar_historial(loterias, timestamp):
         registro = { "fecha": timestamp, "datos": loterias }
         f.write(json.dumps(registro, ensure_ascii=False) + "\n")
 
-import os  # ya debería estar importado
 
-# Crear carpeta si no existe
-os.makedirs("public", exist_ok=True)
+if __name__ == "__main__":
+    loterias, timestamp = obtener_resultados()
+    grupos = agrupar_loterias(loterias)
 
-# Guardar HTML
-with open("public/index.html", "w", encoding="utf-8") as f:
-    f.write(html)
+    # ✅ Crear carpeta si no existe
+    import os
+    os.makedirs("public", exist_ok=True)
+
+    # ✅ Crear el HTML con los resultados
+    html = crear_html(grupos, timestamp)
+
+    # ✅ Guardarlo en public/index.html
+    with open("public/index.html", "w", encoding="utf-8") as f:
+        f.write(html)
 
