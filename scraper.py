@@ -100,6 +100,13 @@ def crear_html(grupos, actualizacion):
     return html
 
 
+def guardar_html(html):
+    import os
+    os.makedirs("public", exist_ok=True)
+    with open("public/index.html", "w", encoding="utf-8") as f:
+        f.write(html)
+
+
 if __name__ == "__main__":
     loterias, timestamp = obtener_resultados()
     grupos = agrupar_loterias(loterias)
