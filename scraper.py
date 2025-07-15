@@ -70,6 +70,35 @@ def guardar_historial(loterias, timestamp):
         registro = { "fecha": timestamp, "datos": loterias }
         f.write(json.dumps(registro, ensure_ascii=False) + "\n")
 
+def crear_html(grupos, actualizacion):
+    html = f"""
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Resultados de Hoy RD</title>
+    </head>
+    <body>
+        <h1>Resultados de Hoy RD</h1>
+        <p>Última actualización: {actualizacion}</p>
+    """
+
+    for grupo, lotes in grupos.items():
+        html += f"<h2>{grupo}</h2><div>"
+        for l in lotes:
+            html += f"""
+            <div style='margin-bottom: 15px;'>
+                <img src="{l['imagen']}" width="50"><br>
+                <strong>{l['nombre']}</strong><br>
+                {l['fecha']}<br>
+                {" ".join(l['numeros'])}
+            </div>
+            """
+        html += "</div>"
+
+    html += "</body></html>"
+    return html
+
 
 if __name__ == "__main__":
     loterias, timestamp = obtener_resultados()
