@@ -7,9 +7,7 @@ def obtener_resultados():
     url = "https://loteriasdominicanas.com/"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-    timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    return loterias, timestamp
-    
+
     loterias = []
 
     for item in soup.find_all('div', class_='game-block'):
@@ -35,17 +33,9 @@ def obtener_resultados():
 
 def agrupar_loterias(loterias):
     grupos = {
-        "Nacional": [],
-        "Leidsa": [],
-        "Real": [],
-        "Loteka": [],
-        "Americanas": [],
-        "Primera": [],
-        "La Suerte": [],
-        "LoteDom": [],
-        "King Lottery": [],
-        "Anguila": [],
-        "Otras": []
+        "Nacional": [], "Leidsa": [], "Real": [], "Loteka": [],
+        "Americanas": [], "Primera": [], "La Suerte": [],
+        "LoteDom": [], "King Lottery": [], "Anguila": [], "Otras": []
     }
 
     for l in loterias:
@@ -75,22 +65,8 @@ def agrupar_loterias(loterias):
 
     return grupos
 
-
-
-
-
-
 def guardar_historial(loterias, timestamp):
     with open("historial.json", "a", encoding="utf-8") as f:
         registro = { "fecha": timestamp, "datos": loterias }
         f.write(json.dumps(registro, ensure_ascii=False) + "\n")
 
-if __name__ == "__main__":
-    loterias, timestamp = obtener_resultados()
-    grupos = agrupar_loterias(loterias)
-    html = crear_html(grupos)
-
-    with open("resultados.html", "w", encoding="utf-8") as f:
-        f.write(html)
-
-    guardar_historial(loterias, timestamp)
