@@ -44,5 +44,18 @@ def actualizar():
 
 
 if __name__ == "__main__":
+    loterias, actualizacion = obtener_resultados()
+    grupos = agrupar_loterias(loterias)
+    html = crear_html(grupos, actualizacion)
+
+    # Guardar el HTML generado
+    os.makedirs("public", exist_ok=True)
+    with open("public/index.html", "w", encoding="utf-8") as f:
+        f.write(html)
+
+    # Subir a Netlify automáticamente
+    subir_a_netlify()
+
+if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
