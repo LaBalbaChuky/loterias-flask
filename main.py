@@ -44,9 +44,11 @@ def actualizar():
 
 
 if __name__ == "__main__":
-    loterias, actualizacion = obtener_resultados()
+    loterias, timestamp = obtener_resultados()
     grupos = agrupar_loterias(loterias)
-    html = crear_html(grupos, actualizacion)
+    html = crear_html(grupos, timestamp)
+    guardar_html(html)
+    print("✅ HTML generado correctamente en public/index.html")
 
     # Guardar el HTML generado
     os.makedirs("public", exist_ok=True)
