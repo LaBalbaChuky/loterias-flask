@@ -2,7 +2,7 @@ import requests
 import os
 
 def subir_a_netlify():
-    site_id = "837f7e6f-1855-4f9a-ad30-4a0bc29bdd72"
+    site_id = "406a9a6b-b25b-47f7-a909-0c165cb41df9"
     token = "nfp_UErELT16pDTr8x4z9aLR96GtcpHiEZ6M16dc"
     file_path = "public/index.html"
 
