@@ -73,31 +73,98 @@ def guardar_historial(loterias, timestamp):
 # scraper.py
 
 def crear_html(grupos, actualizacion):
-    html = f"""<!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <title>Resultados de Hoy RD</title>
-    </head>
-    <body>
-        <h1>Resultados de Hoy RD</h1>
-        <p>Última actualización: {actualizacion}</p>
-    """
-    for grupo, lotes in grupos.items():
-        html += f"<h2>{grupo}</h2><div>"
-        for l in lotes:
+    html = f"""
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resultados de Hoy RD</title>
+  <meta name="description" content="Consulta los resultados más recientes de las loterías Dominicanas. Actualizado automáticamente.">
+  <style>
+    body {{
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }}
+    header {{
+      background-color: #005bbb;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }}
+    .container {{
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }}
+    h1 {{
+      margin-top: 0;
+    }}
+    .grupo {{
+      margin-top: 30px;
+    }}
+    .loteria {{
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }}
+    .loteria img {{
+      width: 100px;
+      vertical-align: middle;
+    }}
+    .loteria span {{
+      display: inline-block;
+      margin-left: 15px;
+      font-size: 1.1em;
+    }}
+    footer {{
+      text-align: center;
+      padding: 20px;
+      color: #777;
+    }}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Resultados de Hoy RD</h1>
+</header>
+
+<div class="container">
+  <p><strong>Última actualización:</strong> {actualizacion}</p>
+"""
+
+    for grupo, loterias in grupos.items():
+        if not loterias:
+            continue
+        html += f"""<div class="grupo">
+  <h2>{grupo}</h2>
+"""
+        for lot in loterias:
+            numeros = " - ".join(lot['numeros']) if lot['numeros'] else "Sin datos"
             html += f"""
-                <div>
-                    <img src="{l['imagen']}" width="50"><br>
-                    <strong>{l['nombre']}</strong><br>
-                    {l['fecha']}<br>
-                    {" ".join(l['numeros'])}
-                </div>
-            """
+  <div class="loteria">
+    <img src="{lot['imagen']}" alt="{lot['nombre']}">
+    <span>{lot['nombre']} ({lot['fecha']}): {numeros}</span>
+  </div>
+"""
         html += "</div>"
 
-    html += "</body></html>"
+    html += f"""
+</div>
+
+<footer>
+  © 2025 Resultados de Hoy RD. Todos los derechos reservados.
+</footer>
+
+</body>
+</html>
+"""
     return html
+
 
 
 def guardar_html(html):
@@ -122,4 +189,5 @@ if __name__ == "__main__":
     # ✅ Guardarlo en public/index.html
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(html)
+
 
