@@ -73,68 +73,65 @@ def guardar_historial(loterias, timestamp):
 # scraper.py
 
 def crear_html(grupos, actualizacion):
-    return f"""
-    <!DOCTYPE html>
-    <html lang="es">
+    html = f"""
+    <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Resultados de Hoy RD</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
         <style>
-            body {{ background: #f4f4f4; font-family: Arial, sans-serif; }}
-            .titulo {{
-                background: #007BFF;
+            body {{
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+            }}
+            header {{
+                background-color: #0056b3;
                 color: white;
-                padding: 15px;
+                padding: 10px;
                 text-align: center;
-                border-radius: 5px;
-                margin-bottom: 20px;
+                font-size: 24px;
+                font-weight: bold;
             }}
-            .loteria-card {{
-                background: white;
-                border-radius: 8px;
+            .grupo {{
+                margin: 20px;
                 padding: 15px;
-                margin-bottom: 10px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                background-color: white;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
             }}
-            .loteria-card h4 {{
-                border-bottom: 2px solid #007BFF;
-                padding-bottom: 5px;
-                margin-bottom: 10px;
+            h2 {{
+                background-color: #e6e6e6;
+                padding: 8px;
+                border-radius: 4px;
+            }}
+            .loteria {{
+                padding: 5px 0;
+                border-bottom: 1px solid #ccc;
             }}
         </style>
     </head>
     <body>
-        <div class="container my-4">
-            <h1 class="titulo">Resultados de Hoy RD</h1>
-            <p class="text-center">Última actualización: {actualizacion}</p>
-            {"".join(
-                f"<div class='loteria-card'><h4>{grupo}</h4>" +
-                "".join(f"<p><strong>{l['nombre']}</strong>: {' - '.join(l['numeros'])}</p>" for l in datos) +
-                "</div>"
-                for grupo, datos in grupos.items()
-            )}
-        </div>
-  
-
-
-<footer>
-  © 2025 Resultados de Hoy RD. Todos los derechos reservados.
-</footer>
-
-</body>
-</html>
-"""
+        <header>Resultados de Hoy RD</header>
+        <p style="text-align:center;">Última actualización: {actualizacion}</p>
+    """
+    for nombre_grupo, lotos in grupos.items():
+        html += f"<div class='grupo'><h2>{nombre_grupo}</h2>"
+        for loteria in lotos:
+            numeros = " - ".join(loteria['numeros'])
+            html += f"<div class='loteria'>{loteria['nombre']} ({loteria['fecha']}): {numeros}</div>"
+        html += "</div>"
+    html += "</body></html>"
     return html
 
 
-
 def guardar_html(html):
-    os.makedirs("public", exist_ok=True)  # Crea la carpeta si no existe
+    import os
+    os.makedirs("public", exist_ok=True)
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(html)
     print("✅ HTML generado correctamente en public/index.html")
+
 
 
 
@@ -152,6 +149,7 @@ if __name__ == "__main__":
     # ✅ Guardarlo en public/index.html
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(html)
+
 
 
 
