@@ -73,88 +73,51 @@ def guardar_historial(loterias, timestamp):
 # scraper.py
 
 def crear_html(grupos, actualizacion):
-    html = f"""
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Resultados de Hoy RD</title>
-  <meta name="description" content="Consulta los resultados más recientes de las loterías Dominicanas. Actualizado automáticamente.">
-  <style>
-    body {{
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f4f4f4;
-      color: #333;
-    }}
-    header {{
-      background-color: #005bbb;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }}
-    .container {{
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-      background-color: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }}
-    h1 {{
-      margin-top: 0;
-    }}
-    .grupo {{
-      margin-top: 30px;
-    }}
-    .loteria {{
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }}
-    .loteria img {{
-      width: 100px;
-      vertical-align: middle;
-    }}
-    .loteria span {{
-      display: inline-block;
-      margin-left: 15px;
-      font-size: 1.1em;
-    }}
-    footer {{
-      text-align: center;
-      padding: 20px;
-      color: #777;
-    }}
-  </style>
-</head>
-<body>
+    return f"""
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Resultados de Hoy RD</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <style>
+            body {{ background: #f4f4f4; font-family: Arial, sans-serif; }}
+            .titulo {{
+                background: #007BFF;
+                color: white;
+                padding: 15px;
+                text-align: center;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }}
+            .loteria-card {{
+                background: white;
+                border-radius: 8px;
+                padding: 15px;
+                margin-bottom: 10px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }}
+            .loteria-card h4 {{
+                border-bottom: 2px solid #007BFF;
+                padding-bottom: 5px;
+                margin-bottom: 10px;
+            }}
+        </style>
+    </head>
+    <body>
+        <div class="container my-4">
+            <h1 class="titulo">Resultados de Hoy RD</h1>
+            <p class="text-center">Última actualización: {actualizacion}</p>
+            {"".join(
+                f"<div class='loteria-card'><h4>{grupo}</h4>" +
+                "".join(f"<p><strong>{l['nombre']}</strong>: {' - '.join(l['numeros'])}</p>" for l in datos) +
+                "</div>"
+                for grupo, datos in grupos.items()
+            )}
+        </div>
+  
 
-<header>
-  <h1>Resultados de Hoy RD</h1>
-</header>
-
-<div class="container">
-  <p><strong>Última actualización:</strong> {actualizacion}</p>
-"""
-
-    for grupo, loterias in grupos.items():
-        if not loterias:
-            continue
-        html += f"""<div class="grupo">
-  <h2>{grupo}</h2>
-"""
-        for lot in loterias:
-            numeros = " - ".join(lot['numeros']) if lot['numeros'] else "Sin datos"
-            html += f"""
-  <div class="loteria">
-    <img src="{lot['imagen']}" alt="{lot['nombre']}">
-    <span>{lot['nombre']} ({lot['fecha']}): {numeros}</span>
-  </div>
-"""
-        html += "</div>"
-
-    html += f"""
-</div>
 
 <footer>
   © 2025 Resultados de Hoy RD. Todos los derechos reservados.
@@ -189,5 +152,6 @@ if __name__ == "__main__":
     # ✅ Guardarlo en public/index.html
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(html)
+
 
 
