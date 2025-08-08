@@ -131,10 +131,10 @@ def crear_html(grupos, actualizacion):
 
 
 def guardar_html(html):
-    import os
-    os.makedirs("public", exist_ok=True)
+    os.makedirs("public", exist_ok=True)  # Crea la carpeta si no existe
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(html)
+    print("✅ HTML generado correctamente en public/index.html")
 
 
 
@@ -152,6 +152,7 @@ if __name__ == "__main__":
     # ✅ Guardarlo en public/index.html
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(html)
+
 
 
 
