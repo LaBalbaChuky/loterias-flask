@@ -1,15 +1,15 @@
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
-import json
+import os
 
+# ===================== SCRAPER =====================
 def obtener_resultados():
     url = "https://loteriasdominicanas.com/"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
     loterias = []
-
     for item in soup.find_all('div', class_='game-block'):
         loteria = {}
 
@@ -22,135 +22,170 @@ def obtener_resultados():
         numeros_tag = item.find_all('span', class_='score')
         loteria['numeros'] = [n.text.strip() for n in numeros_tag]
 
-        img_tag = item.find('img', class_='lazy')
-        src = img_tag.get('data-src') if img_tag else None
-        loteria['imagen'] = f"https://loteriasdominicanas.com{src}" if src and src.startswith('/') else (src or "https://via.placeholder.com/100")
-
         loterias.append(loteria)
 
     timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     return loterias, timestamp
 
+# ===================== AGRUPACIÓN =====================
 def agrupar_loterias(loterias):
     grupos = {
-        "Nacional": [], "Leidsa": [], "Real": [], "Loteka": [],
-        "Americanas": [], "Primera": [], "La Suerte": [],
-        "LoteDom": [], "King Lottery": [], "Anguila": [], "Otras": []
+        "Nacional": [],
+        "Leidsa": [],
+        "Real": [],
+        "Loteka": [],
+        "Americanas": [],
+        "Primera": [],
+        "La Suerte": [],
+        "LoteDom": [],
+        "King Lottery": [],
+        "Anguila": [],
+        "Otras": []
     }
 
     for l in loterias:
         nombre = l['nombre'].lower()
-        if any(x in nombre for x in ["nacional", "juega +", "pega +", "gana más"]):
+        if "nacional" in nombre:
             grupos["Nacional"].append(l)
-        elif any(x in nombre for x in ["leidsa", "pega 3 más", "loto pool", "super kino", "quiniela leidsa", "loto más"]):
+        elif "leidsa" in nombre:
             grupos["Leidsa"].append(l)
-        elif any(x in nombre for x in ["real", "quiniela real", "loto real"]):
+        elif "real" in nombre:
             grupos["Real"].append(l)
-        elif any(x in nombre for x in ["loteka", "mega chances"]):
+        elif "loteka" in nombre:
             grupos["Loteka"].append(l)
         elif any(x in nombre for x in ["new york", "florida", "mega millions", "powerball"]):
             grupos["Americanas"].append(l)
-        elif any(x in nombre for x in ["primera", "loto 5"]):
+        elif "primera" in nombre:
             grupos["Primera"].append(l)
-        elif any(x in nombre for x in ["la suerte"]):
+        elif "suerte" in nombre:
             grupos["La Suerte"].append(l)
-        elif any(x in nombre for x in ["lotedom", "quemaito"]):
+        elif "lote" in nombre:
             grupos["LoteDom"].append(l)
-        elif any(x in nombre for x in ["king lottery"]):
+        elif "king" in nombre:
             grupos["King Lottery"].append(l)
-        elif any(x in nombre for x in ["anguila"]):
+        elif "anguila" in nombre:
             grupos["Anguila"].append(l)
         else:
             grupos["Otras"].append(l)
-
     return grupos
 
-def guardar_historial(loterias, timestamp):
-    with open("historial.json", "a", encoding="utf-8") as f:
-        registro = { "fecha": timestamp, "datos": loterias }
-        f.write(json.dumps(registro, ensure_ascii=False) + "\n")
-
-# scraper.py
-
+# ===================== HTML BONITO =====================
 def crear_html(grupos, actualizacion):
     html = f"""
-    <html>
+    <!DOCTYPE html>
+    <html lang="es">
     <head>
         <meta charset="UTF-8">
         <title>Resultados de Hoy RD</title>
         <style>
             body {{
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f4;
+                font-family: 'Segoe UI', sans-serif;
+                background: #f4f6f8;
                 margin: 0;
                 padding: 0;
             }}
             header {{
-                background-color: #0056b3;
-                color: white;
-                padding: 10px;
+                background: linear-gradient(to right, #004aad, #0066cc);
                 text-align: center;
-                font-size: 24px;
+                padding: 20px 0;
+                color: white;
+                font-size: 26px;
                 font-weight: bold;
             }}
-            .grupo {{
-                margin: 20px;
-                padding: 15px;
-                background-color: white;
-                border-radius: 5px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            p.actualizacion {{
+                text-align: center;
+                color: #333;
+                font-size: 14px;
+                margin: 10px 0;
             }}
-            h2 {{
-                background-color: #e6e6e6;
-                padding: 8px;
-                border-radius: 4px;
+            .grupo-loteria {{
+                background: #fff;
+                margin: 20px auto;
+                max-width: 1100px;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             }}
-            .loteria {{
-                padding: 5px 0;
-                border-bottom: 1px solid #ccc;
+            .grupo-loteria h2 {{
+                color: #004aad;
+                border-left: 4px solid #0077ff;
+                padding-left: 10px;
+                margin-bottom: 15px;
+            }}
+            .tarjeta {{
+                background: #f9fbfe;
+                border-radius: 8px;
+                padding: 12px;
+                margin: 10px;
+                width: 220px;
+                display: inline-block;
+                vertical-align: top;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                text-align: center;
+            }}
+            .tarjeta h3 {{
+                margin: 0;
+                color: #007bff;
+                font-size: 18px;
+            }}
+            .tarjeta .fecha {{
+                font-size: 13px;
+                color: #666;
+                margin-bottom: 10px;
+            }}
+            .numeros {{
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 6px;
+            }}
+            .bola {{
+                background: #fbc02d;
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                color: #333;
             }}
         </style>
     </head>
     <body>
         <header>Resultados de Hoy RD</header>
-        <p style="text-align:center;">Última actualización: {actualizacion}</p>
+        <p class="actualizacion">Última actualización: {actualizacion}</p>
     """
+
     for nombre_grupo, lotos in grupos.items():
-        html += f"<div class='grupo'><h2>{nombre_grupo}</h2>"
+        if not lotos:
+            continue
+        html += f"<div class='grupo-loteria'><h2>{nombre_grupo}</h2>"
         for loteria in lotos:
-            numeros = " - ".join(loteria['numeros'])
-            html += f"<div class='loteria'>{loteria['nombre']} ({loteria['fecha']}): {numeros}</div>"
+            numeros = "".join(f"<div class='bola'>{n}</div>" for n in loteria['numeros'])
+            html += f"""
+            <div class="tarjeta">
+                <h3>{loteria['nombre']}</h3>
+                <p class="fecha">{loteria['fecha']}</p>
+                <div class="numeros">{numeros}</div>
+            </div>
+            """
         html += "</div>"
+
     html += "</body></html>"
     return html
 
-
+# ===================== GUARDAR =====================
 def guardar_html(html):
-    import os
     os.makedirs("public", exist_ok=True)
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(html)
     print("✅ HTML generado correctamente en public/index.html")
 
 
-
-
+# ===================== EJECUCIÓN LOCAL =====================
 if __name__ == "__main__":
-    loterias, timestamp = obtener_resultados()
+    loterias, actualizacion = obtener_resultados()
     grupos = agrupar_loterias(loterias)
-
-    # ✅ Crear carpeta si no existe
-    import os
-    os.makedirs("public", exist_ok=True)
-
-    # ✅ Crear el HTML con los resultados
-    html = crear_html(grupos, timestamp)
-
-    # ✅ Guardarlo en public/index.html
-    with open("public/index.html", "w", encoding="utf-8") as f:
-        f.write(html)
-
-
-
-
-
+    html = crear_html(grupos, actualizacion)
+    guardar_html(html)
