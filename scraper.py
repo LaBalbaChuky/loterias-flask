@@ -72,7 +72,21 @@ def crear_html(loterias, timestamp):
 </html>
 """
     return html
-
+    
+def agrupar_loterias(loterias):
+    grupos = {
+        "Nacional": [],
+        "Leidsa": [],
+        "Real": [],
+        "Loteka": [],
+        "Americanas": [],
+        "Primera": [],
+        "La Suerte": [],
+        "LoteDom": [],
+        "King Lottery": [],
+        "Anguila": [],
+        "Otras": []
+    }
 def guardar_html(html):
     os.makedirs("public", exist_ok=True)
     with open("public/index.html", "w", encoding="utf-8") as f:
@@ -83,3 +97,4 @@ if __name__ == "__main__":
     loterias, ts = obtener_resultados()
     html = crear_html(loterias, ts)
     guardar_html(html)
+
