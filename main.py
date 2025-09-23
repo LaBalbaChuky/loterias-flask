@@ -1,4 +1,5 @@
-from scraper import obtener_resultados, agrupar_loterias, crear_html, guardar_html
+from scraper import obtener_resultados, agrupar_loterias, crear_html, guardar_html, guardar_historial
+
 
 if __name__ == "__main__":
     loterias, actualizacion = obtener_resultados()
